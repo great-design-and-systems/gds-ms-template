@@ -1,4 +1,4 @@
-var API = process.env.API_NAME || '/users/api/';
+var API = process.env.API_NAME || '/api/users/';
 
 function execute(req, res, err, result) {
     if (err) {

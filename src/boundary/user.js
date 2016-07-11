@@ -5,7 +5,8 @@ var ValidateUser = require('../control/validate-user');
 var ValidateEmail = require('../control/validate-email');
 var InvalidUsernameException = require('../control/invalid-username-exception');
 var InvalidEmailException = require('../control/invalid-email-exception');
-var lodash = require('lodash');
+var DeleteUser = require('../control/delete-user');
+var DeleteUserProfileByUserId = require('../control/delete-user-profile-by-user-id');
 module.exports = {
     register: function(registrationForm, callback) {
         var username = registrationForm.username;
@@ -43,9 +44,26 @@ module.exports = {
             if (err) {
                 callback(err);
             } else {
-                lodash.unset(result, 'userId');
-                lodash.unset(result, '_id');
                 callback(undefined, result);
+            }
+        });
+    },
+    removeUser: function(userId, callback) {
+        new DeleteUserProfileByUserId(userId, function(err, result) {
+            if (!err) {
+                new DeleteUser({
+                    userId: userId
+                }, function(err, result) {
+                    if (!err) {
+                        callback(undefined, {
+                            message: 'User has been removed.'
+                        });
+                    } else {
+                        callback(err);
+                    }
+                });
+            } else {
+                callback(err);
             }
         });
     }

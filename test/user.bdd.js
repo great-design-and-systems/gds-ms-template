@@ -57,6 +57,21 @@ describe('User Service BDD', function() {
                     });
 
                 });
+                describe('WHEN: removing user', function() {
+                    var message;
+                    beforeEach(function(done) {
+                        User.removeUser(userId, function(err, result) {
+                            message = result.message;
+                            done();
+                        });
+                    });
+
+                    it('THEN: user and user profile are removed', function() {
+                        expect(!!message).to.equal(true);
+                        expect(message).to.equal('User has been removed.');
+                    });
+
+                });
             });
         });
     });
