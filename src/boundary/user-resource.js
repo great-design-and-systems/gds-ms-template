@@ -1,3 +1,4 @@
+'use strict';
 var User = require('./user');
 var NotFoundException = require('../control/not-found-exception');
 var getRegisterResponse = require('../control/get-register-response');
@@ -29,6 +30,6 @@ module.exports = function(app) {
             } else {
                 res.status(200).send(result);
             }
-        })
+        });
     });
 };

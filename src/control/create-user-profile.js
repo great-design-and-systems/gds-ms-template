@@ -1,3 +1,4 @@
+'use strict';
 var UserProfile = require('../entity/User-profile');
 
 function execute(userProfile, callback) {

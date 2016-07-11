@@ -1,3 +1,4 @@
+'use strict';
 var paswordHash = require('password-hash');
 var PASSWORD_ALGO = process.env.PASSWORD_ALGO;
 var PASSWORD_SALT_LENGTH = process.env.PASSWORD_SALT_LENGTH;

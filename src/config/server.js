@@ -1,3 +1,4 @@
+'use strict';
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var PORT = process.env.PORT = '3000';

@@ -1,3 +1,4 @@
+'use strict';
 var User = require('../entity/User');
 
 function execute(param, callback) {

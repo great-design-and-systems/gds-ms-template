@@ -1,3 +1,4 @@
+'use strict';
 var User = require('../entity/User');
 var HashPassword = require('./hash-password');
 

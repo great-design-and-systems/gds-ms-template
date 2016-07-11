@@ -1,3 +1,4 @@
+'use strict';
 var CreateUser = require('../control/create-user');
 var CreateUserProfile = require('../control/create-user-profile');
 var GetUserProfileByUserId = require('../control/get-user-profile-by-user-id');
@@ -49,11 +50,11 @@ module.exports = {
         });
     },
     removeUser: function(userId, callback) {
-        new DeleteUserProfileByUserId(userId, function(err, result) {
+        new DeleteUserProfileByUserId(userId, function(err) {
             if (!err) {
                 new DeleteUser({
                     userId: userId
-                }, function(err, result) {
+                }, function(err) {
                     if (!err) {
                         callback(undefined, {
                             message: 'User has been removed.'
