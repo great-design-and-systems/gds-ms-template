@@ -5,12 +5,24 @@ var getRegisterResponse = require('../control/get-register-response');
 var API = process.env.API_NAME || '/api/users/';
 
 module.exports = function(app) {
-    app.get(API + 'user-profile/:userId', function(req, res) {
-        User.getProfileByUserId(req.params.userId, function(err, result) {
+    app.get(API + 'user-profile/:username', function(req, res) {
+        User.getUserProfileByUsername(req.params.username, function(err, result) {
             if (err) {
                 res.status(404).send(new NotFoundException('User profile'));
             } else {
                 res.status(200).send(result);
+            }
+        });
+    });
+
+    app.get(API + 'user-password/:username', function(req, res) {
+        User.getUserPasswordByUsername(req.params.username, function(err, result) {
+            if (err) {
+                res.status(404).send(new NotFoundException('Password'));
+            } else {
+                res.status(200).send({
+                    password: result.password
+                });
             }
         });
     });
@@ -32,4 +44,17 @@ module.exports = function(app) {
             }
         });
     });
+
+    app.get('/', function(req, res) {
+        res.status(200).send({
+            domain: process.env.DOMAIN_NAME || 'User',
+            links: {
+                register: 'http://' + req.headers.host + API + 'register/',
+                userProfile: 'http://' + req.headers.host + API + 'user-profile/{username}/',
+                userPassword: 'http://' + req.headers.host + API + 'user-password/{username}/',
+                DELETE: 'http://' + req.headers.host + API + '{userId}/'
+            }
+        });
+    });
+
 };
