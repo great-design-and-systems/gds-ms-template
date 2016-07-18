@@ -16,7 +16,8 @@ var UserSchema = new mongoose.Schema({
             messsage: "{VALUE} is not a valid email address."
         },
         require: [true, 'Email is required.']
-    }
+    },
+    createdOn: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('user', UserSchema);
